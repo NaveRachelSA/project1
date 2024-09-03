@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://d17pdud8j21l1"]
+
+[ext_resource type="Texture2D" uid="uid://rhantt4vq42r" path="res://Mini Pixel Pack 3/Enemies/Alan (16 x 16).png" id="1_2yx7v"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_ske4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f883g"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6tqu"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y7fm"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fbup"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_736ug"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tjcl"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn16j"]
+atlas = ExtResource("1_2yx7v")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_un04l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6tqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y7fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fbup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_736ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tjcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn16j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tjcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_736ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fbup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y7fm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
+script = ExtResource("1_ske4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_2yx7v")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_f883g")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_un04l")
+autoplay = "default"
+frame_progress = 0.899488
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

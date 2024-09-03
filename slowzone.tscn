@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dycw0a5cy62g4"]
+
+[ext_resource type="Script" path="res://slowzone.gd" id="1_epynr"]
+[ext_resource type="Texture2D" uid="uid://bhantqkm06gje" path="res://Mini Pixel Pack 3/slozone_art (1).png" id="1_gfh3r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbf8n"]
+atlas = ExtResource("1_gfh3r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr8dd"]
+atlas = ExtResource("1_gfh3r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5g6s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbf8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr8dd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0wtg"]
+size = Vector2(32, 32)
+
+[node name="slowzone" type="Area2D"]
+script = ExtResource("1_epynr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b5g6s")
+autoplay = "default"
+frame_progress = 0.185857
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s0wtg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

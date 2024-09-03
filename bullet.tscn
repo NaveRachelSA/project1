@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://sx72p6akmvye"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_lerpe"]
+[ext_resource type="Texture2D" uid="uid://cnhusedpq5orn" path="res://Mini Pixel Pack 3/Projectiles/Player_beam (16 x 16).png" id="1_uqwos"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78tqr"]
+size = Vector2(12, 9)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_lerpe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uqwos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_78tqr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.19209e-07, 0.5)
+scale = Vector2(0.5, 0.45)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
