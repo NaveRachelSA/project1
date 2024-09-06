@@ -9,9 +9,9 @@ func spawn_enemies():
 	#	return
 	#spawnable = false
 	#$Timer.start()
-	for x in 9:
+	for x in 5:
 		var e = enemy.instantiate()
-		var pos = Vector2(x * (16 + 8) + 24, 0)
+		var pos = Vector2(x * (48) + 24, 0)
 		add_child(e)
 		e.position = pos
 		
@@ -34,6 +34,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if get_tree().get_nodes_in_group("enemies").size() == 0:
 		spawn_enemies()
+	if get_tree().get_nodes_in_group("player").size() == 0:
+		get_tree().change_scene_to_file("res://start.tscn")
 
 #func _on_timer_timeout() -> void:
 #	spawnable = true

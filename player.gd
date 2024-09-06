@@ -18,7 +18,7 @@ func shoot():
 	$Timer.start()
 	var b = bullet_scene.instantiate()
 	get_tree().root.add_child(b)
-	b.start(position + Vector2(0, -8))
+	b.start(position + Vector2(0, -20))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,10 +38,12 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.animation = "forward"
 	position = position.clamp(Vector2.ZERO, screensize)
 
+func explode():
+	queue_free()
 
 func _on_timer_timeout() -> void:
 	can_shoot = true
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
-		get_tree().quit()
+		explode()
